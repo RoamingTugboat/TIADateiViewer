@@ -11,6 +11,7 @@ namespace TIADateiViewer
 
         Backend backend;
         List<string> nodeTypes;
+        readonly string WindowTitle = "TIA Selection Tool - Datei-Viewer";
 
         public MainWindow()
         {
@@ -27,41 +28,47 @@ namespace TIADateiViewer
             {
                 var tiaFilePath = openFileDialog.FileName;
                 backend.openTiaFile(tiaFilePath);
-                this.Title = tiaFilePath;
+                this.Title = $"{WindowTitle} - \"{tiaFilePath}\"";
             }
 
             if (!backend.isValidFileOpen()) {
                 return;
             }
-            generateNodeSelection(backend.getTiaNodesDictionary());
+            refreshUi(backend.getTiaNodesDictionary());
 
         }
 
-        void generateNodeSelection(Dictionary<string, List<node>> nodeDict)
+        void refreshUi(Dictionary<string, List<node>> nodeDict)
+        {
+            refreshTopPanel(nodeDict);
+            refreshMainPanel(nodeDict);
+        }
+
+        void refreshTopPanel(Dictionary<string, List<node>> nodeDict)
         {
             viewTopPanel.Children.Clear();
-            foreach(var entry in nodeDict)
+            foreach (var entry in nodeDict)
             {
                 viewTopPanel.Children.Add(new Label() { Content = $"{entry.Key} ({entry.Value.Count})" });
                 this.nodeTypes.Add(entry.Key);
             }
+        }
 
+        void refreshMainPanel(Dictionary<string, List<node>> nodeDict)
+        {
             listBox.Items.Clear();
             var thirdDictItem = nodeTypes[2];
-            foreach(var node in nodeDict[thirdDictItem])
+            foreach (var node in nodeDict[thirdDictItem])
             {
                 var nodeNameOrIdentifierProperty = node.properties.FirstOrDefault(e => e.key.Equals("Name"));
-                if(nodeNameOrIdentifierProperty == null)
+                if (nodeNameOrIdentifierProperty == null)
                 {
                     nodeNameOrIdentifierProperty = node.properties.FirstOrDefault(e => e.key.Equals("Id"));
                 }
                 listBox.Items.Add(new ListBoxItem() { Content = $"{nodeNameOrIdentifierProperty.value}\t|Eigenschaften:{node.properties.Count}" });
             }
-            
-
-
         }
-        
+
     }
 
 }

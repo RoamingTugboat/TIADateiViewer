@@ -5,17 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TIADateiViewer"
         mc:Ignorable="d"
-        Title="TIA Selection Tool" Height="532.5" Width="720">
+        Title="" Height="532.5" Width="720" Background="#D0D0D0">
     <StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
             <StackPanel Height="80" Orientation="Horizontal" x:Name="viewTopPanel">
 
             </StackPanel>
         </ScrollViewer>
-        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-            <ListBox x:Name="listBox" Height="370">
-            </ListBox>
-        </ScrollViewer>
+        <ListBox x:Name="listBox" Height="370" Background="#E0E0E0">
+        </ListBox>
         <StackPanel Orientation="Horizontal" Height="40">
             <Button Width="40" Height="40" Click="openTiaFile" Margin="20,0,0,0">
                 <Image Source="Images/FileOpen.png"></Image>
