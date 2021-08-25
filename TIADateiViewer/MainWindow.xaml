@@ -13,10 +13,7 @@
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-            <ListBox x:Name="viewMain" Height="370">
-                <ListBoxItem Content="asd"/>
-                <ListBoxItem Content="asda"/>
-                <ListBoxItem Content="asdasd"/>
+            <ListBox x:Name="listBox" Height="370">
             </ListBox>
         </ScrollViewer>
         <StackPanel Orientation="Horizontal" Height="40">

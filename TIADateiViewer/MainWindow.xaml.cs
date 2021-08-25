@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace TIADateiViewer
 {
@@ -9,11 +10,13 @@ namespace TIADateiViewer
     {
 
         Backend backend;
+        List<string> nodeTypes;
 
         public MainWindow()
         {
             InitializeComponent();
             this.backend = new TiaDateiViewerBackend();
+            nodeTypes = new List<string>();
         }
 
         public void openTiaFile(object sender, RoutedEventArgs e)
@@ -40,7 +43,23 @@ namespace TIADateiViewer
             foreach(var entry in nodeDict)
             {
                 viewTopPanel.Children.Add(new Label() { Content = $"{entry.Key} ({entry.Value.Count})" });
+                this.nodeTypes.Add(entry.Key);
             }
+
+            listBox.Items.Clear();
+            var thirdDictItem = nodeTypes[2];
+            foreach(var node in nodeDict[thirdDictItem])
+            {
+                var nodeNameOrIdentifierProperty = node.properties.FirstOrDefault(e => e.key.Equals("Name"));
+                if(nodeNameOrIdentifierProperty == null)
+                {
+                    nodeNameOrIdentifierProperty = node.properties.FirstOrDefault(e => e.key.Equals("Id"));
+                }
+                listBox.Items.Add(new ListBoxItem() { Content = $"{nodeNameOrIdentifierProperty.value}\t|Eigenschaften:{node.properties.Count}" });
+            }
+            
+
+
         }
         
     }
