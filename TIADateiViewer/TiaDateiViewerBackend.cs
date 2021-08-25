@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace TIADateiViewer
@@ -10,6 +8,8 @@ namespace TIADateiViewer
     {
 
         tiaselectiontool deserializedTiaFile { get; set; }
+        Dictionary<string, List<node>> NodeTypeDictionary { get; set; }
+        
 
         public void openTiaFile(string path)
         {
@@ -18,6 +18,7 @@ namespace TIADateiViewer
             tiaselectiontool deserializedTiaFile = (tiaselectiontool)xmlSerializer.Deserialize(fileReader);
             fileReader.Close();
             this.deserializedTiaFile = deserializedTiaFile;
+            NodeTypeDictionary = deserializedTiaFile.generateNodeDict();
         }
 
         public bool isValidFileOpen()
@@ -25,26 +26,11 @@ namespace TIADateiViewer
             return deserializedTiaFile != null;
         }
 
-        public Dictionary<string, List<node>> getNodes()
+        public Dictionary<string, List<node>> getTiaNodesDictionary()
         {
-            if(!isValidFileOpen())
-            {
-                return null;
-            }
-
-            var nodeDict = new Dictionary<string, List<node>>();
-            foreach(var node in deserializedTiaFile.business.graph.nodes)
-            {
-                if(nodeDict.ContainsKey(node.Type))
-                {
-                    nodeDict[node.Type].Add(node);
-                }
-                else
-                {
-                    nodeDict.Add(node.Type, new List<node>() { node });
-                }
-            }
-            return nodeDict;
+            return NodeTypeDictionary;
         }
+
+
     }
 }

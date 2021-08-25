@@ -30,7 +30,7 @@ namespace TIADateiViewer
             if (!backend.isValidFileOpen()) {
                 return;
             }
-            generateNodeSelection(backend.getNodes());
+            generateNodeSelection(backend.getTiaNodesDictionary());
 
         }
 

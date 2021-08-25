@@ -8,7 +8,6 @@ namespace TIADateiViewer
 
         bool isValidFileOpen();
 
-        Dictionary<string, List<node>> getNodes();
-
+        Dictionary<string, List<node>> getTiaNodesDictionary();
     }
 }
