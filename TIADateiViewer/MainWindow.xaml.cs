@@ -17,6 +17,7 @@ namespace TIADateiViewer
         {
             InitializeComponent();
             this.backend = new TiaDateiViewerBackend();
+            this.Title = WindowTitle;
         }
 
         public void openTiaFile(object sender, RoutedEventArgs e)

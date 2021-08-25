@@ -5,16 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TIADateiViewer"
         mc:Ignorable="d"
-        Title="" Height="532.5" Width="720" Background="#D0D0D0">
-    <StackPanel>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+        Title="" Height="532.5" Width="720" Background="#D0D0D0" Margin="0" Padding="0" MinHeight="640" MinWidth="480">
+    <Grid Width="{Binding ActualWidth, RelativeSource = {RelativeSource AncestorType = {x:Type Window}}}" Height="{Binding ActualHeight, RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="160"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Grid.Row="0">
             <StackPanel Height="80" Orientation="Horizontal" x:Name="viewTopPanel">
 
             </StackPanel>
         </ScrollViewer>
-        <ListBox x:Name="listBox" Height="370" Background="#E0E0E0">
+        <ListBox x:Name="listBox" Background="#E0E0E0" Grid.Row="1">
         </ListBox>
-        <StackPanel Orientation="Horizontal" Height="40">
+        <StackPanel Orientation="Horizontal" Height="40" Grid.Row="2">
             <Button Width="40" Height="40" Click="openTiaFile" Margin="20,0,0,0">
                 <Image Source="Images/FileOpen.png"></Image>
             </Button>
@@ -28,5 +33,5 @@
                 <Image Source="Images/CsvExport.png"></Image>
             </Button>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>
