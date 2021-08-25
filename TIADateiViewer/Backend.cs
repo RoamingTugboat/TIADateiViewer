@@ -4,8 +4,6 @@ namespace TIADateiViewer
 {
     interface Backend
     {
-        void generateTestTiaFile();
-
         void openTiaFile(string path);
 
         bool isValidFileOpen();

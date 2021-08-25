@@ -11,17 +11,6 @@ namespace TIADateiViewer
 
         tiaselectiontool deserializedTiaFile { get; set; }
 
-        public void generateTestTiaFile()
-        {
-            var sampleTiaObject = new tiaselectiontool();
-            sampleTiaObject.assumeExampleValues();
-
-            var xmlSerializer = new XmlSerializer(typeof(tiaselectiontool));
-            var fileCreateStream = new FileStream("sampleTiaFile.xml", FileMode.Create);
-            xmlSerializer.Serialize(fileCreateStream, sampleTiaObject);
-            fileCreateStream.Close();
-        }
-
         public void openTiaFile(string path)
         {
             var xmlSerializer = new XmlSerializer(typeof(tiaselectiontool));

@@ -5,17 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TIADateiViewer"
         mc:Ignorable="d"
-        Title="TIA Selection Tool" Height="570" Width="720">
+        Title="TIA Selection Tool" Height="532.5" Width="720">
     <StackPanel>
         <StackPanel Height="120" Orientation="Horizontal" x:Name="viewTopPanel">
 
         </StackPanel>
         <ContentControl x:Name="viewMain" Height="300"/>
-        <StackPanel Orientation="Horizontal" Height="120">
-            <!-- Todo: https://stackoverflow.com/a/21597209 -->
-            <Button Width="120" Height="120" Click="openTiaFile"/>
-            <Button Width="120" Height="120"/>
-            <Button Width="120" Height="120"/>
+        <StackPanel Orientation="Horizontal" Height="80">
+            <Button Width="40" Height="40" Click="openTiaFile" Margin="20,0,0,0">
+                <Image Source="Images/FileOpen.png"></Image>
+            </Button>
+            <Button Width="40" Height="40" Margin="20,0,0,0">
+                <Image Source="Images/Settings.png"></Image>
+            </Button>
+            <Button Width="40" Height="40">
+                <Image Source="Images/Compare.png"></Image>
+            </Button>
+            <Button Width="40" Height="40">
+                <Image Source="Images/CsvExport.png"></Image>
+            </Button>
         </StackPanel>
     </StackPanel>
 </Window>
