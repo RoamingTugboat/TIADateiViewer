@@ -7,11 +7,13 @@
         mc:Ignorable="d"
         Title="TIA Selection Tool" Height="570" Width="720">
     <StackPanel>
-        <ContentControl x:Name="viewUpperBar" Height="120"/>
+        <StackPanel Height="120" Orientation="Horizontal" x:Name="viewTopPanel">
+
+        </StackPanel>
         <ContentControl x:Name="viewMain" Height="300"/>
         <StackPanel Orientation="Horizontal" Height="120">
+            <!-- Todo: https://stackoverflow.com/a/21597209 -->
             <Button Width="120" Height="120" Click="openTiaFile"/>
-            <Button Width="120" Height="120"/>
             <Button Width="120" Height="120"/>
             <Button Width="120" Height="120"/>
         </StackPanel>

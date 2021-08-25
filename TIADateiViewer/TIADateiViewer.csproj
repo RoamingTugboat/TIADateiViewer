@@ -55,8 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Serialization\XMLNodes\application.cs" />
     <Compile Include="Backend.cs" />
-    <Compile Include="TiaFile.cs" />
+    <Compile Include="Serialization\XMLNodes\business.cs" />
+    <Compile Include="Serialization\XMLNodes\category.cs" />
+    <Compile Include="Serialization\XMLNodes\context.cs" />
+    <Compile Include="Serialization\XMLNodes\element.cs" />
+    <Compile Include="Serialization\XMLNodes\graph.cs" />
+    <Compile Include="Serialization\XMLNodes\group.cs" />
+    <Compile Include="Serialization\XMLNodes\node.cs" />
+    <Compile Include="Serialization\XMLNodes\property.cs" />
+    <Compile Include="Serialization\tiaselectiontool.cs" />
     <Compile Include="TiaDateiViewerBackend.cs" />
     <Compile Include="UCButtons.xaml.cs">
       <DependentUpon>UCButtons.xaml</DependentUpon>
@@ -73,6 +82,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UCButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
