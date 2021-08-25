@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,13 +9,11 @@ namespace TIADateiViewer
     {
 
         Backend backend;
-        List<string> nodes;
 
         public MainWindow()
         {
             InitializeComponent();
             this.backend = new TiaDateiViewerBackend();
-            this.nodes = new List<string>();
         }
 
         public void openTiaFile(object sender, RoutedEventArgs e)
@@ -33,35 +30,18 @@ namespace TIADateiViewer
             if (!backend.isValidFileOpen()) {
                 return;
             }
-
-            generateNodeSelection(backend.getNodeTypes());
+            generateNodeSelection(backend.getNodes());
 
         }
 
-        void generateNodeSelection(List<string> nodeTypes)
+        void generateNodeSelection(Dictionary<string, List<node>> nodeDict)
         {
-            List<Button> buttons = new List<Button>();
-            foreach(var nodeType in nodeTypes)
-            {
-                var button = new Button();
-                button.Content = nodeType;
-                button.Height = 64;
-                button.Width = 96;
-                buttons.Add(button);
-            }
-            this.nodes = backend.getNodeTypes();
             viewTopPanel.Children.Clear();
-            foreach(var nodeName in this.nodes)
+            foreach(var entry in nodeDict)
             {
-                viewTopPanel.Children.Add(new Label() { Content = nodeName });
+                viewTopPanel.Children.Add(new Label() { Content = $"{entry.Key} ({entry.Value.Count})" });
             }
         }
-
-        void selectNode(string nodeType)
-        {
-
-        }
-
         
     }
 

@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="TIA Selection Tool" Height="532.5" Width="720">
     <StackPanel>
-        <StackPanel Height="120" Orientation="Horizontal" x:Name="viewTopPanel">
+        <StackPanel Height="80" Orientation="Horizontal" x:Name="viewTopPanel">
 
         </StackPanel>
-        <ContentControl x:Name="viewMain" Height="300"/>
-        <StackPanel Orientation="Horizontal" Height="80">
+        <ContentControl x:Name="viewMain" Height="370"/>
+        <StackPanel Orientation="Horizontal" Height="40">
             <Button Width="40" Height="40" Click="openTiaFile" Margin="20,0,0,0">
                 <Image Source="Images/FileOpen.png"></Image>
             </Button>
