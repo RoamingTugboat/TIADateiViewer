@@ -10,14 +10,13 @@ namespace TIADateiViewer
     {
 
         Backend backend;
-        List<string> nodeTypes;
+        Dictionary<string, List<node>> nodeDict;
         readonly string WindowTitle = "TIA Selection Tool - Datei-Viewer";
 
         public MainWindow()
         {
             InitializeComponent();
             this.backend = new TiaDateiViewerBackend();
-            nodeTypes = new List<string>();
         }
 
         public void openTiaFile(object sender, RoutedEventArgs e)
@@ -31,34 +30,42 @@ namespace TIADateiViewer
                 this.Title = $"{WindowTitle} - \"{tiaFilePath}\"";
             }
 
-            if (!backend.isValidFileOpen()) {
+            if (!backend.isValidFileOpen())
+            {
                 return;
             }
-            refreshUi(backend.getTiaNodesDictionary());
-
+            this.nodeDict = backend.getTiaNodesDictionary();
+            refreshTopPanel();
         }
 
-        void refreshUi(Dictionary<string, List<node>> nodeDict)
-        {
-            refreshTopPanel(nodeDict);
-            refreshMainPanel(nodeDict);
-        }
-
-        void refreshTopPanel(Dictionary<string, List<node>> nodeDict)
+        void refreshTopPanel()
         {
             viewTopPanel.Children.Clear();
-            foreach (var entry in nodeDict)
+            foreach (var entry in this.nodeDict)
             {
-                viewTopPanel.Children.Add(new Label() { Content = $"{entry.Key} ({entry.Value.Count})" });
-                this.nodeTypes.Add(entry.Key);
+                var dictButton = new TypeSelectorButton();
+                dictButton.TypeName = entry.Key;
+                dictButton.Content = $"{entry.Key} ({entry.Value.Count})";
+                dictButton.Click += typeSelectorButtonClicked;
+
+                viewTopPanel.Children.Add(dictButton);
             }
         }
 
-        void refreshMainPanel(Dictionary<string, List<node>> nodeDict)
+        void typeSelectorButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is TypeSelectorButton))
+            {
+                return;
+            }
+            var dictTypeName = ((TypeSelectorButton)sender).TypeName;
+            refreshMainPanel(dictTypeName);
+        }
+
+        void refreshMainPanel(string dictTypeName)
         {
             listBox.Items.Clear();
-            var thirdDictItem = nodeTypes[2];
-            foreach (var node in nodeDict[thirdDictItem])
+            foreach (var node in this.nodeDict[dictTypeName])
             {
                 var nodeNameOrIdentifierProperty = node.properties.FirstOrDefault(e => e.key.Equals("Name"));
                 if (nodeNameOrIdentifierProperty == null)
@@ -69,6 +76,6 @@ namespace TIADateiViewer
             }
         }
 
-    }
 
+    }
 }
