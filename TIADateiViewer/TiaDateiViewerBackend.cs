@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -15,6 +16,7 @@ namespace TIADateiViewer
         {
             var xmlSerializer = new XmlSerializer(typeof(tiaselectiontool));
             var fileReader = new StreamReader(path);
+
             tiaselectiontool deserializedTiaFile = (tiaselectiontool)xmlSerializer.Deserialize(fileReader);
             fileReader.Close();
             this.deserializedTiaFile = deserializedTiaFile;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using System;
 
 namespace TIADateiViewer
 {
@@ -26,9 +27,15 @@ namespace TIADateiViewer
             openFileDialog.Filter = "TIA Files (*.tia)|*.tia|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                var tiaFilePath = openFileDialog.FileName;
-                backend.openTiaFile(tiaFilePath);
-                this.Title = $"{WindowTitle} - \"{tiaFilePath}\"";
+                try
+                {
+                    var tiaFilePath = openFileDialog.FileName;
+                    backend.openTiaFile(tiaFilePath);
+                    this.Title = $"{WindowTitle} - \"{tiaFilePath}\"";
+                } catch(InvalidOperationException ex)
+                {
+                    MessageBox.Show("Ungueltiges Dateiformat. Das Programm kann nur valide .tia-Dateien einlesen.");
+                }
             }
 
             if (!backend.isValidFileOpen())
@@ -41,6 +48,10 @@ namespace TIADateiViewer
 
         void refreshTopPanel()
         {
+            if(this.nodeDict == null)
+            {
+                return;
+            }
             viewTopPanel.Children.Clear();
             foreach (var entry in this.nodeDict)
             {
@@ -48,7 +59,6 @@ namespace TIADateiViewer
                 dictButton.TypeName = entry.Key;
                 dictButton.Content = $"{entry.Key} ({entry.Value.Count})";
                 dictButton.Click += typeSelectorButtonClicked;
-
                 viewTopPanel.Children.Add(dictButton);
             }
         }
@@ -65,6 +75,10 @@ namespace TIADateiViewer
 
         void refreshMainPanel(string dictTypeName)
         {
+            if (this.nodeDict == null)
+            {
+                return;
+            }
             listBox.Items.Clear();
             foreach (var node in this.nodeDict[dictTypeName])
             {

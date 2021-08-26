@@ -12,8 +12,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="160"/>
         </Grid.RowDefinitions>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Grid.Row="0">
-            <StackPanel Height="80" Orientation="Horizontal" x:Name="viewTopPanel">
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+            <StackPanel Height="80" Orientation="Horizontal" x:Name="viewTopPanel" >
 
             </StackPanel>
         </ScrollViewer>
